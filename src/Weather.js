@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 
 const Weather = () => {
-  const [weather, setWeather] = useState([]);
+  const [weather, setWeather] = useState("");
   const [userWeather, setUserWeather] = useState("");
 
-  const apiKey = "83bbc05ae9ec34a8dd69f3c00fd00c6d";
+  const apiKey = process.env.REACT_APP_API_KEY;
+  console.log(apiKey);
   const apiUrl = "https://api.openweathermap.org/data/2.5/weather";
 
   const valueHandler = (event) => {
@@ -17,9 +18,7 @@ const Weather = () => {
     fetch(apiUrl + queryParams)
       .then((response) => response.json())
       .then((data) => {
-        setWeather(() => {
-          return [data];
-        });
+        setWeather([data]);
         // setWeather([...weather, data]);
       })
       .catch((error) => {
